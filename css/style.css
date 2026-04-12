@@ -1,0 +1,100 @@
+#officine {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+#officine > div {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.officinaInfoParagraph {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.toggleInfoBtn {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.toggleInfoBtn:hover {
+  background-color: #0056b3;
+}
+
+.details-container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.servizi, .pezzi, .accessori {
+  padding: 10px;
+  border-radius: 4px;
+  border-left: 5px solid;
+  font-family: monospace;
+}
+
+.servizi {
+  background-color: #e6f7ff;
+  border-color: #1890ff;
+}
+
+.pezzi {
+  background-color: #f6ffed;
+  border-color: #52c41a;
+}
+
+.accessori {
+  background-color: #fffb8f;
+  border-color: #fadb14;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+h1{
+    font: bold;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+select {
+  display: inline-block; /* Cambiato da block a inline-block */
+  margin: 10px 5px;      /* Margine laterale per distanziarle */
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 150px;
+}
+
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Centrare il gruppo di select nel body */
+body {
+  text-align: center;
+}

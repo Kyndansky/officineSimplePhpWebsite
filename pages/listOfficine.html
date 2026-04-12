@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Officine</title>
+    <link rel="stylesheet" href="./../css/style.css" />
+  </head>
+
+  <body>
+    <div id="authInfo">
+
+    </div>
+    <div>
+      <a href="./index.html">Home</a>
+    </div>
+
+    Filter by pezzo:
+    <select id="selectPezzi">
+      <option value="null">None</option>
+    </select>
+    servizio:
+    <select id="selectServizi" aria-label="sdiwasd">
+      <option value="null">None</option>
+    </select>
+    accessorio:
+    <select id="selectAccessori">
+      <option value="null">None</option>
+    </select>
+    <br /><button id="filterButton">Apply filters</button>
+    <h1>Officine</h1>
+    <div id="officine"></div>
+  </body>
+  <script src="./../js/api_functions.js"></script>
+  <script src="./../js/listOfficine.js"></script>
+  <script src="./../js/globalStartupActions.js"></script>
+
+</html>
