@@ -71,7 +71,6 @@ async function dipendenteLogin(username, password) {
   return JSON.parse(body);
 }
 
-
 async function customerLogin(username, password) {
   const data = new URLSearchParams({
     username: username,
@@ -86,7 +85,14 @@ async function customerLogin(username, password) {
   return JSON.parse(body);
 }
 
-async function customerRegister(username, password, name, surname, email, phone) {
+async function customerRegister(
+  username,
+  password,
+  name,
+  surname,
+  email,
+  phone,
+) {
   const data = new URLSearchParams({
     username: username,
     password: password,
@@ -106,6 +112,20 @@ async function customerRegister(username, password, name, surname, email, phone)
 async function logout() {
   const response = await fetch(baseEndPoint + "logout.php", {
     method: "GET",
+  });
+  let body = await response.text();
+  return JSON.parse(body);
+}
+
+async function addItem(itemType, name, description, price) {
+  const data = new URLSearchParams({
+    name: name,
+    description: description,
+    price: price,
+  });
+  const response = await fetch(baseEndPoint + "add" + itemType + ".php", {
+    method: "POST",
+    body: data,
   });
   let body = await response.text();
   return JSON.parse(body);
