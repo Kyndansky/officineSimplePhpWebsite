@@ -17,7 +17,7 @@ if ($email == null || $password == null || $name == null || $surname == null || 
     exit;
 }
 
-if(AuthManager::customersEmailRegistered($email) || AuthManager::customersUsernameRegistered($username)){
+if(AuthManager::customersEmailRegistered($email)){
     echo error("email already registered");
     exit;
 }

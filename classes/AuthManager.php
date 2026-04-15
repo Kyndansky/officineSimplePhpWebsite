@@ -4,9 +4,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__.'/vendor/PHPMailer-master/src/Exception.php';
-require __DIR__.'/vendor/PHPMailer-master/src/PHPMailer.php';
-require __DIR__.'/vendor/PHPMailer-master/src/SMTP.php';
+require __DIR__.'/../vendor/PHPMailer-master/src/Exception.php';
+require __DIR__.'/../vendor/PHPMailer-master/src/PHPMailer.php';
+require __DIR__.'/../vendor/PHPMailer-master/src/SMTP.php';
 
 define('APP_NAMESPACE', '0239cc42-d5ff-480a-bf43-a8009e81212b');
 class AuthManager
@@ -50,7 +50,7 @@ class AuthManager
         $conn = $db->getConnection();
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $uuid=AuthManager::generate_uuid_v5(APP_NAMESPACE, $email.time());
-        // AuthManager::sendAccountVerificationEmail($email,$uuid);
+        AuthManager::sendAccountVerificationEmail($email,$uuid);
         $stmt = $conn->prepare("INSERT INTO clienti (username, email, password_hash, nome, cognome, telefono, uuid) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("sssssss", $username, $email, $hash, $name, $surname, $phone, $uuid);
         return $stmt->execute();
