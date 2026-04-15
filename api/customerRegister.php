@@ -17,12 +17,22 @@ if ($email == null || $password == null || $name == null || $surname == null || 
     exit;
 }
 
+if(AuthManager::customersEmailRegistered($email) || AuthManager::customersUsernameRegistered($username)){
+    echo error("email already registered");
+    exit;
+}
+
+if(AuthManager::customersUsernameRegistered($username)){
+    echo error("username already registered");
+    exit;
+}
+
 if (AuthManager::registerCustomer($username, $password, $email, $name, $surname, $phone) === true) {
     $data = AuthManager::getCustomerData($username);
     $_SESSION["authData"] = $data;
     echo ok("registration successful", $data);
     exit;
 } else {
-    echo error("registration not successful, try changing username");
+    echo error("registration not successful, try changing username or password");
     exit;
 }

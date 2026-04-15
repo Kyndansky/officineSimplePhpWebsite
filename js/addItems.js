@@ -35,5 +35,6 @@ async function addItem(itemType) {
         return;
 
     const result = await addItem(upperCaseItemType, itemNameValue, itemdescriptionValue, itemPriceValue);
+    console.log(result);
     //todo add msg display or stuff
 }

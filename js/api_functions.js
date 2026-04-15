@@ -106,6 +106,7 @@ async function customerRegister(
     body: data,
   });
   let body = await response.text();
+  console.log(body);
   return JSON.parse(body);
 }
 
