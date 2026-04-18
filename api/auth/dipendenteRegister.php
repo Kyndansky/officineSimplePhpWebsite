@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "/../misc/functions.php";
-require_once __DIR__ . "/../classes/AuthManager.php";
+require_once __DIR__ . "/../../misc/functions.php";
+require_once __DIR__ . "/../../classes/AuthManager.php";
 $username = isset($_GET["username"])?$_GET["username"]:null;
 $password = isset($_GET["password"])?$_GET["password"]:null;
 $role = isset($_GET["role"])?$_GET["role"]:null;

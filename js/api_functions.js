@@ -1,4 +1,6 @@
-var baseEndPoint = "../api/";
+var baseEndpoint = "../api/";
+var authEndpoint = baseEndpoint+"auth/";
+
 
 //returns all officine (filtered by a pezzo or servizio or accessorio or all of them if given)
 async function fetchAllOfficine(
@@ -12,7 +14,7 @@ async function fetchAllOfficine(
     accessorioId: accessorioId,
   });
 
-  const response = await fetch(baseEndPoint + "getOfficine.php", {
+  const response = await fetch(baseEndpoint + "getOfficine.php", {
     method: "POST",
     body: data,
   });
@@ -28,7 +30,7 @@ async function fetchAllItemsFromOfficina(itemType, officinaId) {
     itemType: itemType,
   });
 
-  const response = await fetch(baseEndPoint + "getItemsOfficina.php", {
+  const response = await fetch(baseEndpoint + "getItemsOfficina.php", {
     method: "POST",
     body: data,
   });
@@ -41,7 +43,7 @@ async function fetchItems(itemType) {
   const data = new URLSearchParams({
     itemType: itemType,
   });
-  const response = await fetch(baseEndPoint + "getItems.php", {
+  const response = await fetch(baseEndpoint + "getItems.php", {
     method: "POST",
     body: data,
   });
@@ -50,7 +52,7 @@ async function fetchItems(itemType) {
 }
 
 async function fetchAuthInfo() {
-  const response = await fetch(baseEndPoint + "getAuthInfo.php", {
+  const response = await fetch(authEndpoint + "getAuthInfo.php", {
     method: "POST",
   });
   let body = await response.text();
@@ -62,7 +64,7 @@ async function dipendenteLogin(username, password) {
     username: username,
     password: password,
   });
-  const response = await fetch(baseEndPoint + "dipendenteLogin.php", {
+  const response = await fetch(authEndpoint + "dipendenteLogin.php", {
     method: "POST",
     body: data,
   });
@@ -76,7 +78,7 @@ async function customerLogin(email, password) {
     email: email,
     password: password,
   });
-  const response = await fetch(baseEndPoint + "customerLogin.php", {
+  const response = await fetch(authEndpoint + "customerLogin.php", {
     method: "POST",
     body: data,
   });
@@ -99,7 +101,7 @@ async function customerRegister(
     email: email,
     phone: phone,
   });
-  const response = await fetch(baseEndPoint + "customerRegister.php", {
+  const response = await fetch(authEndpoint + "customerRegister.php", {
     method: "POST",
     body: data,
   });
@@ -109,7 +111,7 @@ async function customerRegister(
 }
 
 async function logout() {
-  const response = await fetch(baseEndPoint + "logout.php", {
+  const response = await fetch(authEndpoint + "logout.php", {
     method: "GET",
   });
   let body = await response.text();
@@ -122,7 +124,7 @@ async function addItem(itemType, name, description, price) {
     description: description,
     price: price,
   });
-  const response = await fetch(baseEndPoint + "add" + itemType + ".php", {
+  const response = await fetch(baseEndpoint + "add" + itemType + ".php", {
     method: "POST",
     body: data,
   });
