@@ -15,17 +15,8 @@ function main() {
 
 //handles everything for adding an item
 async function addItem(itemType) {
-    if (
-        itemType !== "pezzo" ||
-        itemType !== "servizio" ||
-        itemType !== "accessorio"
-    )
-        return;
-    if(itemType==="pezzo"){
-        
-    }
-    const upperCaseItemType =
-        itemType.charAt(0).toUpperCase() + itemType.slice(1);
+    //return if itemType is not valid
+    if (itemType !== "pezzo" && itemType !== "servizio" && itemType !== "accessorio") return;
 
     const itemNameValue = document.getElementById(itemType + "NameInput").value;
     const itemdescriptionValue = document.getElementById(
@@ -36,7 +27,11 @@ async function addItem(itemType) {
     if (itemNameValue === "" || itemdescriptionValue === "" || itemPriceValue === "")
         return;
 
-    const result = await addItem(upperCaseItemType, itemNameValue, itemdescriptionValue, itemPriceValue);
+    let result;
+    if (itemType === "pezzo") result = await addPezzo(itemNameValue, itemdescriptionValue, itemPriceValue);
+    if (itemType === "accessorio") result = await addAccessorio(itemNameValue, itemdescriptionValue, itemPriceValue);
+    if (itemType === "servizio") result = await addServizio(itemNameValue, itemdescriptionValue, itemPriceValue);
+
     console.log(result);
     //todo add msg display or stuff
 }

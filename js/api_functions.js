@@ -1,5 +1,5 @@
 var baseEndpoint = "../api/";
-var officineEndpoint=baseEndpoint+"officine/"
+var officineEndpoint = baseEndpoint + "officine/"
 var authEndpoint = baseEndpoint + "auth/";
 var itemsEndpoint = baseEndpoint + "items/";
 var accessoriEndpoint = itemsEndpoint + "accessori/";
@@ -99,7 +99,6 @@ async function dipendenteLogin(username, password) {
     body: data,
   });
   let body = await response.text();
-  console.log(body);
   return JSON.parse(body);
 }
 
@@ -113,7 +112,6 @@ async function customerLogin(email, password) {
     body: data,
   });
   let body = await response.text();
-  console.log(body);
   return JSON.parse(body);
 }
 
@@ -136,7 +134,6 @@ async function customerRegister(
     body: data,
   });
   let body = await response.text();
-  console.log(body);
   return JSON.parse(body);
 }
 
@@ -161,3 +158,50 @@ async function addItem(itemType, name, description, price) {
   let body = await response.text();
   return JSON.parse(body);
 }
+
+async function addPezzo(name, description, price) {
+  const data = new URLSearchParams({
+    name: name,
+    description: description,
+    price: price,
+  });
+  const response = await fetch(pezziEndpoint + "addPezzo.php", {
+    method: "POST",
+    body: data,
+  });
+  let body = await response.text();
+  console.log(body);
+  return JSON.parse(body);
+}
+
+
+async function addAccessorio(name, description, price) {
+  const data = new URLSearchParams({
+    name: name,
+    description: description,
+    price: price,
+  });
+  const response = await fetch(accessoriEndpoint + "addAccessorio.php", {
+    method: "POST",
+    body: data,
+  });
+  let body = await response.text();
+  console.log(body);
+  return JSON.parse(body);
+}
+
+async function addServizio(name, description, price) {
+  const data = new URLSearchParams({
+    name: name,
+    description: description,
+    price: price,
+  });
+  const response = await fetch(serviziEndpoint + "addServizio.php", {
+    method: "POST",
+    body: data,
+  });
+  let body = await response.text();
+  console.log(body);
+  return JSON.parse(body);
+}
+

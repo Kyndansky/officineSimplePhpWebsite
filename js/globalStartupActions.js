@@ -11,9 +11,13 @@ async function setAuthInfo() {
         authInfoDiv.innerText = "User is not authenticated";
     }
     else {
-        authInfoDiv.innerText = "User is authenticated. Hello " + authInfo["data"]["nome"];
+        authInfoDiv.innerText = "User is authenticated. Hello ";
         if (authInfo["data"]["ruolo"]) {
+            authInfoDiv.innerText += authInfo["data"]["username"];
             authInfoDiv.innerText += " {" + authInfo["data"]["ruolo"] + "}";
+        }
+        else {
+            authInfoDiv.innerText += authInfo["data"]["nome"];
         }
         let buttonLogout = document.createElement("button");
         buttonLogout.innerText = "Logout";

@@ -98,3 +98,61 @@ select:focus {
 body {
   text-align: center;
 }
+
+/* --- Home Page Specific Styles --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.home-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 40px;
+  font-family: 'Poppins', sans-serif; /* Font più moderno */
+}
+
+.btn-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  padding: 16px 20px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.25s ease;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-home:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  filter: brightness(1.1);
+}
+
+/* Gruppo Registrazione e Login (Blu Professionale) */
+.btn-auth {
+  background-color: #3b82f6;
+  color: #ffffff !important;
+}
+
+/* Gruppo Funzionalità (Grigio Ardesia/Scuro) */
+.btn-action {
+  background-color: #475569;
+  color: #ffffff !important;
+}
+
+/* AuthInfo migliorato */
+#authInfo:not(:empty) {
+  display: inline-block;
+  background: #f1f5f9;
+  padding: 10px 25px;
+  border-radius: 50px;
+  color: #64748b;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  margin-bottom: 30px;
+  border: 1px solid #e2e8f0;
+}

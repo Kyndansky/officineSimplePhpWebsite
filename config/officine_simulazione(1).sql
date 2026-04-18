@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 18, 2026 at 11:22 AM
+-- Generation Time: Apr 18, 2026 at 05:40 PM
 -- Server version: 12.2.2-MariaDB
 -- PHP Version: 8.5.4
 
@@ -34,6 +34,14 @@ CREATE TABLE `accessori` (
   `descrizione` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `accessori`
+--
+
+INSERT INTO `accessori` (`codice_accessorio`, `costo_unitario`, `nome_accessorio`, `descrizione`) VALUES
+(1, 10, 'profumatore', 'profumatore per auto sigma'),
+(2, 123, 'sigmaAccessorio', 'wiaodia');
+
 -- --------------------------------------------------------
 
 --
@@ -55,7 +63,7 @@ CREATE TABLE `clienti` (
 --
 
 INSERT INTO `clienti` (`email`, `password_hash`, `nome`, `cognome`, `telefono`, `uuid`, `email_verified`) VALUES
-('davidericcobeneproton@proton.me', '$2y$12$cdvDbeaBqpjRw1tWpjk4N.TiqjPl3yLbIZfbKIY1aftWX1kQQW4ei', 'Davide', 'Riccobene', '28928', '12ae3b3f-6ebb-5cbb-b297-8cf58a9f20a3', 0);
+('davidericcobeneproton@proton.me', '$2y$12$M4ui/SlF8gyRclHZZhCKwefTAi.YxN84sJm7HB3lxqNGFwmhqp/0C', 'Davide', 'Riccobene', '237829', '442444b9-42fb-5476-81b0-32a06735be5e', 1);
 
 -- --------------------------------------------------------
 
@@ -74,7 +82,7 @@ CREATE TABLE `dipendenti` (
 --
 
 INSERT INTO `dipendenti` (`username`, `password_hash`, `ruolo`) VALUES
-('Kynda', '$2y$12$9TETzrt3tWINq6nHAxRQmuyrIkhVIJ3Fr1Hc6HlHqzilJHeG9cbGS', 'admin');
+('Kynda', '$2y$12$jzgtIUwz40ejBy1JsF8NVuNSEfE9EbBqtT0KI.s4RUyIGr9EKAYTW', 'admin');
 
 -- --------------------------------------------------------
 
@@ -150,6 +158,13 @@ CREATE TABLE `pezzi_ricambio` (
   `descrizione` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `pezzi_ricambio`
+--
+
+INSERT INTO `pezzi_ricambio` (`codice_pezzo`, `costo_unitario`, `nome_pezzo`, `descrizione`) VALUES
+(1, 123, 'sigma', 'adwadsada');
+
 -- --------------------------------------------------------
 
 --
@@ -169,7 +184,8 @@ CREATE TABLE `servizi` (
 
 INSERT INTO `servizi` (`codice_servizio`, `nome_servizio`, `costo_orario`, `descrizione`) VALUES
 (1, 'cambio gomme', 20, 'Cambio delle gomme dell\'automobile'),
-(2, 'sigma_servizio', 10, 'questo servizio e\' sigma');
+(2, 'sigma_servizio', 10, 'questo servizio e\' sigma'),
+(3, 'wads', 32, 'dadsa');
 
 --
 -- Indexes for dumped tables
@@ -240,7 +256,7 @@ ALTER TABLE `servizi`
 -- AUTO_INCREMENT for table `accessori`
 --
 ALTER TABLE `accessori`
-  MODIFY `codice_accessorio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codice_accessorio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `officine`
@@ -252,13 +268,13 @@ ALTER TABLE `officine`
 -- AUTO_INCREMENT for table `pezzi_ricambio`
 --
 ALTER TABLE `pezzi_ricambio`
-  MODIFY `codice_pezzo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codice_pezzo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `servizi`
 --
 ALTER TABLE `servizi`
-  MODIFY `codice_servizio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codice_servizio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
