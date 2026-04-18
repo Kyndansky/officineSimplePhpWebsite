@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "/../misc/functions.php";
-require_once __DIR__ . "/../classes/OfficineManager.php";
+require_once __DIR__ . "/../../misc/functions.php";
+require_once __DIR__ . "/../../classes/OfficineManager.php";
 $manager = new OfficineManager();
 
 //checks if filtering ids where given, if not, we assign all of them to null so that we can use the non-filtering function.
