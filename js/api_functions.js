@@ -71,9 +71,9 @@ async function dipendenteLogin(username, password) {
   return JSON.parse(body);
 }
 
-async function customerLogin(username, password) {
+async function customerLogin(email, password) {
   const data = new URLSearchParams({
-    username: username,
+    email: email,
     password: password,
   });
   const response = await fetch(baseEndPoint + "customerLogin.php", {
@@ -86,7 +86,6 @@ async function customerLogin(username, password) {
 }
 
 async function customerRegister(
-  username,
   password,
   name,
   surname,
@@ -94,7 +93,6 @@ async function customerRegister(
   phone,
 ) {
   const data = new URLSearchParams({
-    username: username,
     password: password,
     name: name,
     surname: surname,

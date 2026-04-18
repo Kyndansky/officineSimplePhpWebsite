@@ -12,13 +12,13 @@ define('APP_NAMESPACE', '0239cc42-d5ff-480a-bf43-a8009e81212b');
 class AuthManager
 {
 
-    public static function loginCustomer($username, $password): bool
+    public static function loginCustomer($email, $password): bool
     {
         $db = new DatabaseManager();
         $conn = $db->getConnection();
 
-        $stmt = $conn->prepare("SELECT password_hash FROM clienti WHERE username = ?");
-        $stmt->bind_param("s", $username);
+        $stmt = $conn->prepare("SELECT password_hash FROM clienti WHERE email = ?");
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -44,15 +44,15 @@ class AuthManager
         return false;
     }
 
-    public static function registerCustomer($username, $password, $email, $name, $surname, $phone): bool
+    public static function registerCustomer($password, $email, $name, $surname, $phone): bool
     {
         $db = new DatabaseManager();
         $conn = $db->getConnection();
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $uuid=AuthManager::generate_uuid_v5(APP_NAMESPACE, $email.time());
         AuthManager::sendAccountVerificationEmail($email,$uuid);
-        $stmt = $conn->prepare("INSERT INTO clienti (username, email, password_hash, nome, cognome, telefono, uuid) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $username, $email, $hash, $name, $surname, $phone, $uuid);
+        $stmt = $conn->prepare("INSERT INTO clienti (email, password_hash, nome, cognome, telefono, uuid) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $email, $hash, $name, $surname, $phone, $uuid);
         return $stmt->execute();
     }
 
@@ -61,15 +61,6 @@ class AuthManager
         $conn = $db->getConnection();
         $stmt = $conn->prepare("SELECT email FROM clienti WHERE email = ?");
         $stmt->bind_param("s", $email);
-        $stmt->execute();
-        return $stmt->get_result()->num_rows > 0;
-    }
-
-    public static function customersUsernameRegistered($username):bool{
-        $db = new DatabaseManager();
-        $conn = $db->getConnection();
-        $stmt = $conn->prepare("SELECT username FROM clienti WHERE username = ?");
-        $stmt->bind_param("s", $username);
         $stmt->execute();
         return $stmt->get_result()->num_rows > 0;
     }
@@ -103,7 +94,7 @@ $mail = new PHPMailer(true);
 
 try {
     //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -154,20 +145,17 @@ try {
         return $stmt->execute();
     }
 
-    public static function getCustomerData($customerUsername)
+    public static function getCustomerData($customerEmail)
     {
         $db = new DatabaseManager();
         $conn = $db->getConnection();
 
-        $stmt = $conn->prepare("SELECT username, email, nome, cognome, telefono FROM clienti WHERE username = ?");
-        $stmt->bind_param("s", $customerUsername);
+        $stmt = $conn->prepare("SELECT email, nome, cognome, telefono FROM clienti WHERE email = ?");
+        $stmt->bind_param("s", $customerEmail);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
 
-    // public static function getDipendenteData($username){
-    //     return ["username"=>$username, "role"=>"admin"];
-    // }
 
     public static function getDipendenteData($username)
     {

@@ -5,10 +5,10 @@ function main() {
 }
 
 async function login() {
-    const username = document.getElementById("usernameInput").value;
+    const email = document.getElementById("emailInput").value;
     const password = document.getElementById("passwordInput").value;
 
-    const result = await customerLogin(username, password);
+    const result = await customerLogin(email, password);
     if (result["successful"] === true) {
         setAuthInfo();
     }

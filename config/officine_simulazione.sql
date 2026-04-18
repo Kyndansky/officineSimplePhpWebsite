@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 12, 2026 at 09:06 PM
+-- Generation Time: Apr 18, 2026 at 11:22 AM
 -- Server version: 12.2.2-MariaDB
 -- PHP Version: 8.5.4
 
@@ -41,20 +41,21 @@ CREATE TABLE `accessori` (
 --
 
 CREATE TABLE `clienti` (
-  `username` varchar(20) NOT NULL,
   `email` varchar(32) NOT NULL,
   `password_hash` varchar(64) NOT NULL,
   `nome` varchar(20) NOT NULL,
   `cognome` varchar(20) NOT NULL,
-  `telefono` varchar(20) NOT NULL
+  `telefono` varchar(20) NOT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `email_verified` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `clienti`
 --
 
-INSERT INTO `clienti` (`username`, `email`, `password_hash`, `nome`, `cognome`, `telefono`) VALUES
-('Kynda', 'davidericcobene10@gmail.com', '$2y$12$QL5Y7AR9tPwlBNp11qQsq.JhLofxKwa1ZDRdoQue67aXUu9TvvX9W', 'Davide', 'Riccobene', '932032');
+INSERT INTO `clienti` (`email`, `password_hash`, `nome`, `cognome`, `telefono`, `uuid`, `email_verified`) VALUES
+('davidericcobeneproton@proton.me', '$2y$12$cdvDbeaBqpjRw1tWpjk4N.TiqjPl3yLbIZfbKIY1aftWX1kQQW4ei', 'Davide', 'Riccobene', '28928', '12ae3b3f-6ebb-5cbb-b297-8cf58a9f20a3', 0);
 
 -- --------------------------------------------------------
 
@@ -184,8 +185,7 @@ ALTER TABLE `accessori`
 -- Indexes for table `clienti`
 --
 ALTER TABLE `clienti`
-  ADD PRIMARY KEY (`username`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`email`);
 
 --
 -- Indexes for table `dipendenti`

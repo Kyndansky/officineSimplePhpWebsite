@@ -5,14 +5,13 @@ require_once __DIR__ . "/../classes/AuthManager.php";
 if (!isset($_SESSION))
     session_start();
 $email = isset($_POST["email"]) ? $_POST["email"] : null;
-$username = isset($_POST["username"]) ? $_POST["username"] : null;
 $password = isset($_POST["password"]) ? $_POST["password"] : null;
 $name = isset($_POST["name"]) ? $_POST["name"] : null;
 $surname = isset($_POST["surname"]) ? $_POST["surname"] : null;
 $phone = isset($_POST["phone"]) ? $_POST["phone"] : null;
 
 
-if ($email == null || $password == null || $name == null || $surname == null || $phone == null || $username == null) {
+if ($email == null || $password == null || $name == null || $surname == null || $phone == null) {
     echo error("some fields are missing");
     exit;
 }
@@ -22,17 +21,12 @@ if(AuthManager::customersEmailRegistered($email)){
     exit;
 }
 
-if(AuthManager::customersUsernameRegistered($username)){
-    echo error("username already registered");
-    exit;
-}
-
-if (AuthManager::registerCustomer($username, $password, $email, $name, $surname, $phone) === true) {
-    $data = AuthManager::getCustomerData($username);
+if (AuthManager::registerCustomer($password, $email, $name, $surname, $phone) === true) {
+    $data = AuthManager::getCustomerData($email);
     $_SESSION["authData"] = $data;
     echo ok("registration successful", $data);
     exit;
 } else {
-    echo error("registration not successful, try changing username or password");
+    echo error("registration not successful, try again");
     exit;
 }

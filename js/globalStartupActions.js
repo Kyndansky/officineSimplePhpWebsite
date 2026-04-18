@@ -11,7 +11,7 @@ async function setAuthInfo() {
         authInfoDiv.innerText = "User is not authenticated";
     }
     else {
-        authInfoDiv.innerText = "User is authenticated. Hello " + authInfo["data"]["username"];
+        authInfoDiv.innerText = "User is authenticated. Hello " + authInfo["data"]["nome"];
         if (authInfo["data"]["ruolo"]) {
             authInfoDiv.innerText += " {" + authInfo["data"]["ruolo"] + "}";
         }
