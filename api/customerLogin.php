@@ -12,12 +12,15 @@ if ($email === null || $password === null) {
       exit;
 }
 
+if (!AuthManager::isCustomerEmailVerified($email)) {
+      echo error("verify your email address first to be able to use your account");
+}
+
 if (AuthManager::loginCustomer($email, $password)) {
       $data = AuthManager::getCustomerData($email);
-      $_SESSION["authData"]=$data;
+      $_SESSION["authData"] = $data;
       echo ok("login successful", $data);
       exit;
-}
-else{
+} else {
       echo error("Wrong password");
 }

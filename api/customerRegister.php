@@ -16,15 +16,13 @@ if ($email == null || $password == null || $name == null || $surname == null || 
     exit;
 }
 
-if(AuthManager::customersEmailRegistered($email)){
+if (AuthManager::customersEmailRegistered($email)) {
     echo error("email already registered");
     exit;
 }
 
 if (AuthManager::registerCustomer($password, $email, $name, $surname, $phone) === true) {
-    $data = AuthManager::getCustomerData($email);
-    $_SESSION["authData"] = $data;
-    echo ok("registration successful", $data);
+    echo ok("registration successful: verify your email before unlocking all features");
     exit;
 } else {
     echo error("registration not successful, try again");
