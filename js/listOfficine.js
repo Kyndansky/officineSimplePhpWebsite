@@ -5,14 +5,14 @@ async function main() {
   if (!officineResult.successful) return;
   populateOfficine(officineResult.data["officine"]);
 
-  const pezziResult = await fetchItems("Pezzi");
-  const accessoriResult = await fetchItems("Accessori");
-  const serviziResult = await fetchItems("Servizi");
+  const pezziResult = await fetchAllPezzi();
+  const accessoriResult = await fetchAllAccessori();
+  const serviziResult = await fetchAllServizi();
 
   if (!pezziResult || !accessoriResult || !serviziResult)
     return;
 
-  populateFilters(pezziResult.data["pezzi"], accessoriResult.data["accessori"], serviziResult.data["servizi"]);
+  populateFilters(pezziResult.data, accessoriResult.data, serviziResult.data);
   document.getElementById("filterButton").addEventListener("click", searchFilteredOfficine);
 }
 

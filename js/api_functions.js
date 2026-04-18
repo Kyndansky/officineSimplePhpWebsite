@@ -1,6 +1,10 @@
 var baseEndpoint = "../api/";
-var authEndpoint = baseEndpoint+"auth/";
-
+var officineEndpoint=baseEndpoint+"officine/"
+var authEndpoint = baseEndpoint + "auth/";
+var itemsEndpoint = baseEndpoint + "items/";
+var accessoriEndpoint = itemsEndpoint + "accessori/";
+var pezziEndpoint = itemsEndpoint + "pezzi/";
+var serviziEndpoint = itemsEndpoint + "servizi/";
 
 //returns all officine (filtered by a pezzo or servizio or accessorio or all of them if given)
 async function fetchAllOfficine(
@@ -14,7 +18,7 @@ async function fetchAllOfficine(
     accessorioId: accessorioId,
   });
 
-  const response = await fetch(baseEndpoint + "getOfficine.php", {
+  const response = await fetch(officineEndpoint + "getOfficine.php", {
     method: "POST",
     body: data,
   });
@@ -39,13 +43,39 @@ async function fetchAllItemsFromOfficina(itemType, officinaId) {
 }
 
 //returns all items given an item type ("Pezzi" | "Accessori" | "Servizi")
-async function fetchItems(itemType) {
-  const data = new URLSearchParams({
-    itemType: itemType,
-  });
-  const response = await fetch(baseEndpoint + "getItems.php", {
+// async function fetchItems(itemType) {
+//   //we select the endpoint based on the parameter given
+//   const endPoint = itemType === "Pezzi" ? pezziEndpoint + "getAllPezzi.php" : itemType === "Accessori" ? accessoriEndpoint + "getAllAccessori.php" : itemType === "Servizi" ? serviziEndpoint + "getAllServizi.php" : "";
+//   const data = new URLSearchParams({
+//     itemType: itemType,
+//   });
+//   const response = await fetch(endPoint, {
+//     method: "POST",
+//     body: data,
+//   });
+//   let body = await response.text();
+//   return JSON.parse(body);
+// }
+
+async function fetchAllAccessori() {
+  const response = await fetch(accessoriEndpoint + "getAllAccessori.php", {
     method: "POST",
-    body: data,
+  });
+  let body = await response.text();
+  return JSON.parse(body);
+}
+
+async function fetchAllPezzi() {
+  const response = await fetch(pezziEndpoint + "getAllPezzi.php", {
+    method: "POST",
+  });
+  let body = await response.text();
+  return JSON.parse(body);
+}
+
+async function fetchAllServizi() {
+  const response = await fetch(serviziEndpoint + "getAllServizi.php", {
+    method: "POST",
   });
   let body = await response.text();
   return JSON.parse(body);

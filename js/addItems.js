@@ -21,7 +21,9 @@ async function addItem(itemType) {
         itemType !== "accessorio"
     )
         return;
-
+    if(itemType==="pezzo"){
+        
+    }
     const upperCaseItemType =
         itemType.charAt(0).toUpperCase() + itemType.slice(1);
 
