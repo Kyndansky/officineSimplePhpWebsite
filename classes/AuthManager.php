@@ -94,7 +94,7 @@ class AuthManager
             "oggetto" => "Account verification for officine",
             "body" => "Hello, this mail was sent automatically.<br>" .
                  "Press the following link to verify your email: <br>" .
-                 "<a href='http://".Config::$domain."/api/verifyCustomerEmail.php?uuid=" . $uuid . "&email=" . urlencode($emailAddress) . "'>Verify Account</a>"
+                 "<a href='http://".Config::$domain."/api/auth/verifyCustomerEmail.php?uuid=" . $uuid . "&email=" . urlencode($emailAddress) . "'>Verify Account</a>"
         ];
 
         $ch = curl_init($url);
