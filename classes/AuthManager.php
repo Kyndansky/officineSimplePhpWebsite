@@ -1,13 +1,6 @@
 <?php
 require_once __DIR__ . "/DatabaseManager.php";
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require __DIR__ . '/../vendor/PHPMailer-master/src/Exception.php';
-require __DIR__ . '/../vendor/PHPMailer-master/src/PHPMailer.php';
-require __DIR__ . '/../vendor/PHPMailer-master/src/SMTP.php';
-
+require_once __DIR__ . "/../config/config.php";
 define('APP_NAMESPACE', '0239cc42-d5ff-480a-bf43-a8009e81212b');
 class AuthManager
 {
@@ -93,44 +86,33 @@ class AuthManager
     public static function sendAccountVerificationEmail($emailAddress, $uuid): bool
     {
 
-        //Create an instance; passing `true` enables exceptions
-        $mail = new PHPMailer(true);
+        $url = "https://agora.ismonnet.it/sendMail/send.php";
 
-        try {
-            //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth = true;                                   //Enable SMTP authentication
-            $mail->Username = 'esercizio-5binf@ismonnet.eu';                     //SMTP username
-            $mail->Password = 'hjmr bcab tegm oshp';                               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $data = [
+            "mail_invio" => "esercizio-5binf@ismonnet.eu",
+            "mail_destinazione" => $emailAddress,
+            "oggetto" => "Account verification for officine",
+            "body" => "Hello, this mail was sent automatically.<br>" .
+                 "Press the following link to verify your email: <br>" .
+                 "<a href='http://".Config::$domain."/api/verifyCustomerEmail.php?uuid=" . $uuid . "&email=" . urlencode($emailAddress) . "'>Verify Account</a>"
+        ];
 
-            //Recipients
-            $mail->setFrom('esercizio-5binf@ismonnet.eu', 'NoReply');
-            $mail->addAddress($emailAddress);     //Add a recipient
-            //$mail->addReplyTo('info@example.com', 'Information');
-            //$mail->addCC('cc@example.com');
-            //$mail->addBCC('bcc@example.com');
+        $ch = curl_init($url);
 
-            //Attachments
-            //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Content-Type: application/json"
+        ]);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Account verification for officine';
-            $mailBody = "Hello, this mail was sent automatically.<br>" .
-                "Press the following link to verify your email: <br>" .
-                "<a href='http://localhost/officineSimplePhpWebsite/api/verifyCustomerEmail.php?uuid=" . $uuid . "&email=" . urlencode($emailAddress) . "'>Verify Account</a>";
-            $mail->Body = $mailBody;
-            $mail->AltBody = $mailBody;
+        $response = curl_exec($ch);
 
-            $mail->send();
-            return true;
-        } catch (Exception $e) {
+        if (curl_errno($ch)) {
+            echo "Errore cURL: " . curl_error($ch);
             return false;
+        } else {
+            return true;
         }
     }
 
