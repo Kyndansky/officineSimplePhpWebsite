@@ -12,7 +12,10 @@ class Config
     static function init()
     {
         $dotEnv = Dotenv\Dotenv::createImmutable(__DIR__);
-        $dotEnv=$dotEnv->load();
-
+        $dotEnv = $dotEnv->load();
+        Config::$hostname = $dotEnv['DB_HOST'];
+        Config::$dbname = $dotEnv['DB_NAME'];
+        Config::$username = $dotEnv['DB_USER'];
+        Config::$password = $dotEnv['DB_PASS'];
     }
 }
