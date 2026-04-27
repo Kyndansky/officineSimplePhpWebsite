@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/../vendor/autoload.php";
 
 class Config
 {
@@ -6,5 +7,12 @@ class Config
     static public $username = "root";
     static public $password = "";
     static public $dbname = "officine_simulazione";
-    static public $domain="officinariccobene5b.netsons.org";
+    static public $domain = "officinariccobene5b.netsons.org";
+
+    static function init()
+    {
+        $dotEnv = Dotenv\Dotenv::createImmutable(__DIR__);
+        $dotEnv=$dotEnv->load();
+
+    }
 }

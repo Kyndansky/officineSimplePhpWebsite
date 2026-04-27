@@ -1,0 +1,11 @@
+{
+    "name": "riccobene_davide/officine-simple-php-website",
+    "autoload": {
+        "psr-4": {
+            "RiccobeneDavide\\OfficineSimplePhpWebsite\\": "src/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
